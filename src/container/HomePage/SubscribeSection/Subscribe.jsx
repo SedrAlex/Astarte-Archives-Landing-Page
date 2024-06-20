@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Grid, Typography, TextField, Button, Card } from "@mui/material";
 import Logo from "../../../assets/logo.png"; // Path to your logo
-
+import DamascusMuseum from "../../../assets/DamascusMuseum.png";
 const Subscribe = () => {
   const [email, setEmail] = useState("");
 
@@ -37,11 +37,19 @@ const Subscribe = () => {
           alt="Quantum Temple"
           style={{ maxWidth: "100%", height: "auto" }}
         />
-        <Typography variant="h5" gutterBottom>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "rgb(234, 218, 213)" }}
+        >
           TRAVEL. TRACK. DISCOVER.
         </Typography>
-        <Typography variant="subtitle1" gutterBottom>
-          SUBSCRIBE FOR CULTURAL DEEP DIVES, NEWS AND MORE FROM Astarte ASTARTE
+        <Typography
+          variant="subtitle1"
+          gutterBottom
+          sx={{ color: "rgb(234, 218, 213)" }}
+        >
+          SUBSCRIBE FOR CULTURAL DEEP DIVES, NEWS AND MORE FROM ASTARTE
           ARCHEIVES
         </Typography>
         <form onSubmit={handleSubmit}>
@@ -67,7 +75,11 @@ const Subscribe = () => {
               },
             }}
           />
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ color: "rgb(234, 218, 213)" }}
+          >
             Subscribe
           </Button>
         </form>

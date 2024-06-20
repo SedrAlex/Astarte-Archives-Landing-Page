@@ -58,7 +58,7 @@ function CultureExperiences() {
             position: "relative",
             overflow: "hidden",
             backgroundColor: "rgb(19, 19, 19)",
-            mb: 4,
+            mb: 2,
             boxShadow: "0px 4px 20px #B56C32",
             borderRadius: "30px",
             border: "none",

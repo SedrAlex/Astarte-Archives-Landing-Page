@@ -16,10 +16,10 @@ const Partners = () => {
   return (
     <Box sx={{ width: "100%", backgroundColor: "#000", padding: "2rem 0" }}>
       <Typography
-        color="#B56C32"
         variant="h4"
         textAlign="center"
         marginBottom="2rem"
+        sx={{ color: "rgb(234, 218, 213)" }}
       >
         Our Partners
       </Typography>

@@ -7,6 +7,7 @@ import CultureExpreiences from "../../../container/HomePage/CultureExpreiences/C
 import Experiences from "../../../container/HomePage/CultureExpreiences/Experiences";
 import Subscribe from "../../../container/HomePage/SubscribeSection/Subscribe";
 import FundedProject from "../../../container/HomePage/FundedProjects/FundedProject";
+import MuseumSection from "../../../container/HomePage/MuseumSection/MuseumSection";
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
       <Hero />
       <Partners />
       <Breif />
+      <MuseumSection />
       <Experiences />
       <FundedProject />
       <Subscribe />
