@@ -35,6 +35,7 @@ const StyledImage = styled("img")({
 const Breif = () => {
   return (
     <Box
+      id="about"
       sx={{
         width: "100%",
         padding: 1,
@@ -70,13 +71,12 @@ const Breif = () => {
             component="h1"
             gutterBottom
             sx={{
-              fontWeight: "bold", // Makes the text bold
-              color: "#B56C32", // Changes the color of the text
-              textAlign: "center", // Centers the text
-              padding: "8px", // Adds padding inside the border
-              borderRadius: "4px", // Optional: Rounds the corners of the border
-              display: "inline-block", // Ensures the border wraps the text content only
-              margin: "20px 0", // Adds vertical spacing around the title
+              fontWeight: "bold",
+              textAlign: "center",
+              padding: "8px",
+              borderRadius: "4px",
+              display: "inline-block",
+              margin: "20px 0",
             }}
           >
             What is Astarte Archives?
@@ -90,6 +90,7 @@ const Breif = () => {
               padding: "8px",
               borderRadius: "4px",
               fontSize: "1.4rem",
+              color: "rgb(234, 218, 213)",
             }}
           >
             Astarte Archives is a pioneering NFT platform dedicated to the

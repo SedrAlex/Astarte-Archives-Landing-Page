@@ -20,7 +20,6 @@ function CultureExperiences() {
       imageUrl: palmyra,
       duration: "Duration: 6h",
     },
-    // Duplicate the experience for demonstration
     {
       title: "Sunrise Water Purification at Pura Tirta Empul",
       description:
@@ -41,19 +40,19 @@ function CultureExperiences() {
     <Box
       sx={{
         display: "flex",
-        flexDirection: "row", // Changed from "column" to "row"
-        flexWrap: "wrap", // Allows wrapping of items if the container width is not enough
-        justifyContent: "center", // Centers the cards horizontally
-        alignItems: "center", // Aligns the cards vertically
-        gap: 5, // Adds space between the cards
-        padding: 3, // Optional: Adds padding around the entire container for better spacing
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 5,
+        padding: 3,
       }}
     >
       {experiences.map((experience, index) => (
         <Card
           key={index}
           sx={{
-            maxWidth: 400, // Adjusted width to fit multiple cards in a row
+            maxWidth: 400,
             height: 700,
             position: "relative",
             overflow: "hidden",
@@ -75,7 +74,7 @@ function CultureExperiences() {
               boxShadow: "0 -8px 6px -6px #B56C32",
             }}
           />
-          <CardContent sx={{ padding: 3, color: "white" }}>
+          <CardContent sx={{ padding: 3, color: "rgb(234, 218, 213)" }}>
             <Typography gutterBottom variant="h5" component="div">
               {experience.title}
             </Typography>
@@ -90,12 +89,14 @@ function CultureExperiences() {
               <Typography
                 sx={{
                   fontWeight: "bold",
-                  padding: "4px 8px", // Smaller padding
+                  padding: "4px 8px",
                   borderRadius: "8px",
                   display: "inline-block",
                   backgroundColor: "#2C2C2C",
-                  fontSize: "0.75rem", // Smaller font size
-                  width: "auto", // Adjust width based on content
+                  fontSize: "0.75rem",
+                  color: "rgb(234, 218, 213)",
+
+                  width: "auto",
                 }}
               >
                 {experience.duration}
@@ -104,17 +105,17 @@ function CultureExperiences() {
                 size="small"
                 endIcon={<ArrowForwardIcon />}
                 sx={{
-                  ml: 6, // Adjusted margin for spacing
+                  ml: 6,
                   borderColor: "#B56C32",
                   borderWidth: 1,
                   borderStyle: "solid",
                   borderRadius: 2,
                   color: "#B56C32",
-                  padding: "4px 8px", // Smaller padding
+                  padding: "4px 8px",
                   fontWeight: "bold",
                   "&:hover": {
                     backgroundColor: "#B56C32",
-                    color: "white",
+                    color: "rgb(234, 218, 213)",
                   },
                 }}
               >

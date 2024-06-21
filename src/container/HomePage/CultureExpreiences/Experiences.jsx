@@ -32,6 +32,7 @@ const Experiences = () => {
 
   return (
     <Box
+      id="experiences"
       sx={{
         mt: 3,
         display: "flex",
@@ -42,7 +43,7 @@ const Experiences = () => {
       <Typography
         variant="h4"
         component="h2"
-        sx={{ marginBottom: 4, color: "#fff" }}
+        sx={{ marginBottom: 4, color: "rgb(234, 218, 213)" }}
       >
         OUR CURATED CULTURAL EXPERIENCES
       </Typography>
@@ -89,7 +90,7 @@ const Experiences = () => {
                 variant="h6"
                 component="div"
                 sx={{
-                  color: "#fff",
+                  color: "rgb(234, 218, 213)",
                 }}
               >
                 {achievement.title}
@@ -106,10 +107,10 @@ const Experiences = () => {
           marginTop: 0.1,
           marginBottom: 2,
           backgroundColor: "#B56C32",
-          color: "white",
+          color: "rgb(234, 218, 213)",
           "&:hover": {
             backgroundColor: "#B56C32",
-            color: "white",
+            color: "rgb(234, 218, 213)",
           },
         }}
       >

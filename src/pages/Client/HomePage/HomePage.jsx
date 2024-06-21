@@ -16,8 +16,8 @@ const HomePage = () => {
       <Hero />
       <Partners />
       <Breif />
-      <MuseumSection />
       <Experiences />
+      <MuseumSection />
       <FundedProject />
       <Subscribe />
     </>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -15,33 +15,12 @@ import Logo from "../../assets/logo.png";
 
 export default function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [connectToggled, setConnectToggled] = useState(false);
-  const [scrolled, setScrolled] = useState(false); // State to track if the navbar is scrolled
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  const handleConnectToggle = () => {
-    setConnectToggled(!connectToggled);
-  };
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const offset = window.scrollY;
-  //     if (offset > 50) {
-  //       setScrolled(true);
-  //     } else {
-  //       setScrolled(false);
-  //     }
-  //   };
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
 
   const drawer = (
     <Box
@@ -68,22 +47,47 @@ export default function NavBar() {
         <CloseIcon />
       </IconButton>
       <img src={Logo} alt="Logo" style={{ height: 50, marginBottom: 20 }} />
-      <Button sx={{ display: "block", my: 2 }} onClick={handleConnectToggle}>
+      <Button
+        href="#connect"
+        sx={{ display: "block", my: 2 }}
+        onClick={handleDrawerToggle}
+      >
         Connect
       </Button>
-      <Button sx={{ display: "block", my: 2 }}>About</Button>
-      <Button sx={{ display: "block", my: 2 }}>Experiences</Button>
-      <Button sx={{ display: "block", my: 2 }}>Impact Fund</Button>
-      <Button sx={{ display: "block", my: 2 }}>Collection</Button>
+      <Button
+        href="#about"
+        sx={{ display: "block", my: 2 }}
+        onClick={handleDrawerToggle}
+      >
+        About
+      </Button>
+      <Button
+        href="#experiences"
+        sx={{ display: "block", my: 2 }}
+        onClick={handleDrawerToggle}
+      >
+        Experiences
+      </Button>
+      <Button
+        href="#impact-fund"
+        sx={{ display: "block", my: 2 }}
+        onClick={handleDrawerToggle}
+      >
+        Impact Fund
+      </Button>
+      <Button
+        href="#museums"
+        sx={{ display: "block", my: 2 }}
+        onClick={handleDrawerToggle}
+      >
+        Museums
+      </Button>
     </Box>
   );
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar
-        // position="fixed"
-        sx={{ background: "#000", boxShadow: "none" }}
-      >
+      <AppBar sx={{ background: "#000", boxShadow: "none" }}>
         <Toolbar>
           <img src={Logo} alt="Logo" style={{ height: 50 }} />
           {isMobile ? (
@@ -100,19 +104,20 @@ export default function NavBar() {
             <Box
               sx={{ marginLeft: "auto", display: "flex", alignItems: "center" }}
             >
-              <Button color="inherit" sx={{ mx: 4 }}>
+              <Button href="#about" color="inherit" sx={{ mx: 4 }}>
                 About
               </Button>
-              <Button color="inherit" sx={{ mx: 4 }}>
-                Collections
+              <Button href="#museums" color="inherit" sx={{ mx: 4 }}>
+                Museums
               </Button>
-              <Button color="inherit" sx={{ mx: 4 }}>
+              <Button href="#experiences" color="inherit" sx={{ mx: 4 }}>
                 Experiences
               </Button>
-              <Button color="inherit" sx={{ mx: 4 }}>
+              <Button href="#impact-fund" color="inherit" sx={{ mx: 4 }}>
                 Impact Fund
               </Button>
               <Button
+                href="#connect"
                 sx={{
                   backgroundColor: theme.palette.primary.main,
                   color: theme.palette.primary.contrastText,

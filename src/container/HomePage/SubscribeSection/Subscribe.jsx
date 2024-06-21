@@ -64,13 +64,13 @@ const Subscribe = () => {
               marginBottom: "20px",
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "#B56C32", // Change border color
+                  borderColor: "#B56C32",
                 },
                 "&:hover fieldset": {
-                  borderColor: "#B56C32", // Change border color on hover
+                  borderColor: "#B56C32",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "#B56C32", // Change border color when focused
+                  borderColor: "#B56C32",
                 },
               },
             }}

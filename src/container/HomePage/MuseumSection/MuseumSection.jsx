@@ -43,12 +43,14 @@ const museums = [
 
 const MuseumSection = () => {
   return (
-    <Grid
+    <Box
+      id="museums"
       container
       spacing={1}
       justifyContent="center"
       alignItems="center"
-      sx={{ height: "100vh" }}
+      overflow="hidden"
+      sx={{ padding: "0 100px" }}
     >
       {" "}
       <Box
@@ -58,7 +60,8 @@ const MuseumSection = () => {
           alignItems: "center",
           textAlign: "center",
           marginBottom: 4,
-          color: "#fff",
+          marginTop: 4,
+          color: "rgb(234, 218, 213)",
         }}
       >
         <Typography
@@ -82,15 +85,19 @@ const MuseumSection = () => {
         </Typography>
       </Box>
       <Grid item>
-        <Grid container spacing={1} justifyContent="center">
+        <Grid container spacing={2} justifyContent="center">
+          {" "}
+          {/* Adjusted spacing */}
           {museums.map((museum, index) => (
-            <Grid item key={index} xs={12} md={6}>
+            <Grid item key={index} xs={12} md={6} sx={{ padding: "8px" }}>
+              {" "}
+              {/* Added padding */}
               <MuseumCard {...museum} />
             </Grid>
           ))}
         </Grid>
       </Grid>
-    </Grid>
+    </Box>
   );
 };
 

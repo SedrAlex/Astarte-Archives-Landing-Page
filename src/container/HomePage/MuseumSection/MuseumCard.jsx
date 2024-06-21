@@ -6,7 +6,7 @@ const MuseumCard = ({ title, description, image }) => (
     sx={{
       maxWidth: 600,
       height: 300,
-      margin: 2,
+      margin: 1,
       backgroundColor: "rgb(19, 19, 19)",
       borderColor: " #B56C32",
     }}
@@ -29,7 +29,7 @@ const MuseumCard = ({ title, description, image }) => (
             gutterBottom
             variant="h5"
             component="div"
-            sx={{ color: "white" }}
+            sx={{ color: "rgb(234, 218, 213)" }}
           >
             {title}
           </Typography>

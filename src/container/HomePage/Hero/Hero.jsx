@@ -65,10 +65,19 @@ const Hero = () => {
       <Typography
         variant="h2"
         component="h1"
-        sx={{ color: "white", textAlign: "center", mb: 4, zIndex: 3 }}
+        sx={{
+          color: "#B56C32",
+          textAlign: "center",
+          mb: 4,
+          zIndex: 3,
+          fontSize: "3rem",
+          textShadow:
+            "2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff",
+        }}
       >
         History Happened Here
       </Typography>
+
       <Button
         variant="contained"
         color="primary"
@@ -78,7 +87,7 @@ const Hero = () => {
       </Button>
       <KeyboardArrowDownIcon
         sx={{
-          color: "white",
+          color: "rgb(234, 218, 213)",
           fontSize: "3rem",
           animation: "bounce 2s infinite",
           zIndex: 3,

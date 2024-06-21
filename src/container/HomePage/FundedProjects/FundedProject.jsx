@@ -1,6 +1,14 @@
-import StatisticsSection from "./StatisticSection";
-import ProjectCard from "./ProjectCard";
-import { Grid, Box, Typography, styled, Button } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  Button,
+  styled,
+} from "@mui/material";
+
 import backgroundImage from "../../../assets/fund.jpeg";
 const BouncingButton = styled(Button)({
   animation: "bounce 2s infinite",
@@ -35,35 +43,96 @@ const FundedProject = () => {
 
   return (
     <Box
+      id="impact-fund"
       sx={{
+        backgroundColor: "#000",
+        minHeight: "100vh",
+        padding: "2rem",
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        minHeight: "100vh",
-        padding: 4, // Added padding for overall spacing
+        color: "#B56C32",
+        textAlign: "center",
+        mb: 4,
+        zIndex: 3,
+        fontSize: "3rem",
+        textShadow:
+          "2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff",
       }}
     >
-      <Typography variant="h3" align="center" gutterBottom fontWeight="bold">
-        IMPACT PROJECTS LINKED TO YOUR TRAVEL EXPERIENCES
+      <Typography variant="h4" component="h2" align="center" gutterBottom>
+        OUR DEDICATED IMPACT FUNDS FOSTERS REGENERATIVE TOURISM EDUCATION,
+        CULTURAL SITES RESTORATION, ARTS AND CRAFTS REVITALIZATION, AND MANY
+        MORE
       </Typography>
-      {/* <Typography
-        variant="body1"
-        align="center"
-        color="text.secondary"
-        gutterBottom
-        sx={{
-          fontSize: "1.1rem", // Slightly larger font size for better readability
-          lineHeight: "1.75", // Increased line height for better text flow
-          margin: "20px 0", // Added top and bottom margin for better separation
-          textTransform: "none", // Ensure text is not automatically capitalized
-          fontWeight: "medium", // Medium weight for slightly more emphasis
-        }}
+      <Grid container spacing={4} justifyContent="center">
+        <Grid item xs={12} sm={4}>
+          <Typography variant="h2" align="center">
+            $750K+
+          </Typography>
+          <Typography variant="h6" align="center">
+            ECONOMIC IMPACT
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Typography variant="h2" align="center">
+            21
+          </Typography>
+          <Typography variant="h6" align="center">
+            PROJECTS LISTED
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Typography variant="h2" align="center">
+            5K+
+          </Typography>
+          <Typography variant="h6" align="center">
+            PEOPLE IMPACTED
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid
+        container
+        spacing={4}
+        justifyContent="center"
+        sx={{ marginTop: "2rem" }}
       >
-        Our dedicated impact funds fosters regenerative tourism education,
-        cultural sites restoration, arts and crafts revitalization, and
-        sustainable farming and many more.
-      </Typography> */}
-      {/* <StatisticsSection /> */}
+        {projects.map((project, index) => (
+          <Grid item xs={12} sm={4} key={index}>
+            <Card sx={{ backgroundColor: "#1c1c1c" }}>
+              <CardMedia
+                component="img"
+                height="200"
+                image={project.image}
+                alt={project.title}
+              />
+              <CardContent>
+                <Button
+                  variant="contained"
+                  color={
+                    project.status === "Needs Funding"
+                      ? "warning"
+                      : project.status === "Achieved"
+                      ? "success"
+                      : "primary"
+                  }
+                  size="small"
+                >
+                  {project.status.toUpperCase()}
+                </Button>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  sx={{ marginTop: "1rem" }}
+                >
+                  {project.description.toUpperCase()}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 };
