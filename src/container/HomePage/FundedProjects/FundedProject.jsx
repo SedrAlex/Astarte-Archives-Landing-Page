@@ -52,42 +52,91 @@ const FundedProject = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        color: "#B56C32",
-        textAlign: "center",
-        mb: 4,
-        zIndex: 3,
-        fontSize: "3rem",
-        textShadow:
-          "2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff",
       }}
     >
-      <Typography variant="h4" component="h2" align="center" gutterBottom>
+      <Typography
+        variant="h1"
+        component="h1"
+        align="center"
+        gutterBottom
+        sx={{
+          color: "#B56C32",
+          textAlign: "center",
+          mb: 4,
+          zIndex: 3,
+          fontSize: "2rem",
+          textShadow:
+            "2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff",
+        }}
+      >
         OUR DEDICATED IMPACT FUNDS FOSTERS REGENERATIVE TOURISM EDUCATION,
         CULTURAL SITES RESTORATION, ARTS AND CRAFTS REVITALIZATION, AND MANY
         MORE
       </Typography>
       <Grid container spacing={4} justifyContent="center">
         <Grid item xs={12} sm={4}>
-          <Typography variant="h2" align="center">
+          <Typography
+            variant="h2"
+            align="center"
+            sx={{
+              color: "#000",
+              textShadow:
+                "2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff",
+            }}
+          >
             $750K+
           </Typography>
-          <Typography variant="h6" align="center">
+          <Typography
+            variant="h6"
+            align="center"
+            sx={{
+              color: "#000",
+            }}
+          >
             ECONOMIC IMPACT
           </Typography>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Typography variant="h2" align="center">
+          <Typography
+            variant="h2"
+            align="center"
+            sx={{
+              color: "#000",
+              textShadow:
+                "2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff",
+            }}
+          >
             21
           </Typography>
-          <Typography variant="h6" align="center">
+          <Typography
+            variant="h6"
+            align="center"
+            sx={{
+              color: "#000",
+            }}
+          >
             PROJECTS LISTED
           </Typography>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Typography variant="h2" align="center">
+          <Typography
+            variant="h2"
+            align="center"
+            sx={{
+              color: "#000",
+              textShadow:
+                "2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff",
+            }}
+          >
             5K+
           </Typography>
-          <Typography variant="h6" align="center">
+          <Typography
+            variant="h6"
+            align="center"
+            sx={{
+              color: "#000",
+            }}
+          >
             PEOPLE IMPACTED
           </Typography>
         </Grid>

@@ -12,11 +12,12 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Logo from "../../assets/logo.png";
-
+import { useNavigate } from "react-router-dom";
 export default function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -110,7 +111,13 @@ export default function NavBar() {
               <Button href="#museums" color="inherit" sx={{ mx: 4 }}>
                 Museums
               </Button>
-              <Button href="#experiences" color="inherit" sx={{ mx: 4 }}>
+              <Button
+                color="inherit"
+                sx={{ mx: 4 }}
+                onClick={() => {
+                  navigate("/experiences");
+                }}
+              >
                 Experiences
               </Button>
               <Button href="#impact-fund" color="inherit" sx={{ mx: 4 }}>
