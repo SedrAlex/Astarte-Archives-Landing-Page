@@ -1,10 +1,10 @@
 import React from "react";
-import ExperiencesHero from "../../../container/ExperiencesPage/Hero/ExperiencesHero";
-import YearRoundedExperiences from "../../../container/ExperiencesPage/YearRoundedExperiences/YearRoundedExperiences";
-import MapSection from "../../../container/ExperiencesPage/MapSection/MapSectiom";
-import SeasonalExperiences from "../../../container/ExperiencesPage/SeasonalExperiences/SeasonalExperiences";
-import UpcomingEvents from "../../../container/ExperiencesPage/UpcomingEvents/UpcomingEvents";
-import ImpactSection from "../../../container/ExperiencesPage/ImpactSection/ImpactSection";
+import ExperiencesHero from "../../../container/Experiences/Hero/ExperiencesHero";
+import YearRoundedExperiences from "../../../container/Experiences/YearRoundedExperiences/YearRoundedExperiences";
+import MapSection from "../../../container/Experiences/MapSection/MapSectiom";
+import SeasonalExperiences from "../../../container/Experiences/SeasonalExperiences/SeasonalExperiences";
+import UpcomingEvents from "../../../container/Experiences/UpcomingEvents/UpcomingEvents";
+import ImpactSection from "../../../container/Experiences/ImpactSection/ImpactSection";
 
 const ExperiencesPage = () => {
   return (

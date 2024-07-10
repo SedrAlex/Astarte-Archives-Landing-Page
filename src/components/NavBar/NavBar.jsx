@@ -120,7 +120,10 @@ export default function NavBar() {
               >
                 Experiences
               </Button>
-              <Button href="#impact-fund" color="inherit" sx={{ mx: 4 }}>
+              <Button color="inherit" sx={{ mx: 4 }}   onClick={() => {
+                  navigate("/impact-fund");
+                }}
+              >
                 Impact Fund
               </Button>
               <Button
