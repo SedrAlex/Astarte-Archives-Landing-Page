@@ -4,6 +4,9 @@ import ImpactFundStatistics from '../../../container/ImpactFund/Statistics/Impac
 import ImpcatFundedAbout from '../../../container/ImpactFund/ImpactFundedAbout/ImpcatFundedAbout'
 import ImpactChoices from '../../../container/ImpactFund/ImpactChoice/ImpactChoices'
 import FundedProjects from '../../../container/ImpactFund/FundedProjects/FundedProjects'
+import ProjectsToContribute from '../../../container/ImpactFund/ProjectsToContribute/ProjectsToContribute'
+import ContributionModel from '../../../container/ImpactFund/ContributionModel/ContributionModel'
+import ContactUs from '../../../container/ImpactFund/ContactUs/ContactUs'
 
 const ImactFundPage = () => {
   return (
@@ -14,6 +17,9 @@ const ImactFundPage = () => {
         <ImpcatFundedAbout />
         <ImpactChoices />
         <FundedProjects />
+        <ProjectsToContribute />
+        <ContributionModel />
+        <ContactUs />
     </div>
   )
 }

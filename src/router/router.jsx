@@ -3,6 +3,7 @@ import MainLayout from "../pages/MainLayouts/MainLayout";
 import HomePage from "../pages/Client/HomePage/HomePage";
 import ExperiencesPage from "../pages/Client/ExperiencesPage/ExperiencesPage";
 import ImactFundPage from "../pages/Client/ImpactFundPage/ImactFundPage";
+import Project from "../pages/Client/ProjectByIdPage/Project";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +21,16 @@ export const router = createBrowserRouter([
       },
       {
         path: "impact-fund",
-        element: <ImactFundPage />,
+        children: [
+          {
+          path: "",
+          element: <ImactFundPage />,
+          },
+          {
+            path: ":id",
+            element: <Project />,
+            },
+        ]
       },
     ],
   },

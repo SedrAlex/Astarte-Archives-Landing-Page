@@ -7,7 +7,7 @@ import NavBar from '../../../components/NavBar/NavBar';
 
 const BackgroundImage = styled(Box)({
   position: "relative",
-  height: "80vh",
+  height: "85vh",
   backgroundImage: `url(${ImpactFundedBackground})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
