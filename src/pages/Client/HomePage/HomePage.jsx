@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Hero from "../../../container/Home/Hero/Hero";
 import NavBar from "../../../components/NavBar/NavBar";
 import Partners from "../../../container/Home/Partners/Partners";
@@ -8,8 +8,13 @@ import Experiences from "../../../container/Home/CultureExpreiences/Experiences"
 import Subscribe from "../../../container/Home/SubscribeSection/Subscribe";
 import FundedProject from "../../../container/Home/FundedProjects/FundedProject";
 import MuseumSection from "../../../container/Home/MuseumSection/MuseumSection";
+import { NFTPlatformContext } from "../../../Context/NFTPlatformContext";
 
 const HomePage = () => {
+
+  const {} = useContext(NFTPlatformContext)
+  
+
   return (
     <>
       {" "}
