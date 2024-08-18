@@ -1,0 +1,47 @@
+
+.SearchBar{
+    width: 100%;
+}
+
+.SearchBar_box{
+    width: 40%;
+    margin:  0 auto;
+    background-color: #ecf0f3;
+    color: #ecf0f3;
+    display: flex;
+    border-radius: 5rem;
+    align-items: center;
+    margin-top: 8rem;
+    margin-bottom: 3rem;
+    box-shadow: 1rem 1rem 1rem  #d3dae7,
+    -1rem -1rem 1rem #fff;
+}
+
+.SearchBar_box_icon{
+    font-size: 3rem;
+    padding: .5rem .8rem;
+    cursor: pointer;
+    color: #4c5773
+}
+
+.SearchBar_box input{
+    width: 85%;
+    border: 0;
+    outline: 0;
+    padding: 2rem;
+    background-color: #ecf0f3;;
+
+}
+
+.SearchBar_box input::placeholder{
+    color: #4c5773;
+    font-size: 1.2rem;
+}
+
+@media screen and (max-width: 35em) {
+    .SearchBar_box{
+        width: 90%;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+}

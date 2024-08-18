@@ -14,7 +14,7 @@ contract NFTPlatform is ERC721URIStorage {
     Counters.Counter private _tokenIds;
     Counters.Counter private _itemsSold;
 
-    uint256 listingPrice = 0.0015 ether;
+    uint256 public listingPrice = 0.0015 ether;
 
     address payable owner;
 

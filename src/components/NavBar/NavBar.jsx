@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -13,16 +13,25 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import { NFTPlatformContext } from "../../Context/NFTPlatformContext";
+
 export default function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
-
+  const { currentAccount, connectWallet } = useContext(NFTPlatformContext);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleClick = async () => {
+    if (currentAccount === "") {
+      await connectWallet();
+    } else {
+      navigate("/upload-nft");
+    }
+  };
   const drawer = (
     <Box
       sx={{
@@ -120,27 +129,48 @@ export default function NavBar() {
               >
                 Experiences
               </Button>
-              <Button color="inherit" sx={{ mx: 4 }}   onClick={() => {
+              <Button
+                color="inherit"
+                sx={{ mx: 4 }}
+                onClick={() => {
                   navigate("/impact-fund");
                 }}
               >
                 Impact Fund
               </Button>
-              <Button
-                href="#connect"
-                sx={{
-                  backgroundColor: theme.palette.primary.main,
-                  color: theme.palette.primary.contrastText,
-                  borderRadius: "112px",
-                  mx: 1.5,
-                  "&:hover": {
-                    backgroundColor: theme.palette.primary.main, // Maintain the background color on hover
-                    opacity: 0.9,
-                  },
-                }}
-              >
-                Connect
-              </Button>
+              {currentAccount === "" ? (
+                <Button
+                  onClick={handleClick}
+                  sx={{
+                    backgroundColor: theme.palette.primary.main,
+                    color: theme.palette.primary.contrastText,
+                    borderRadius: "112px",
+                    mx: 1.5,
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.main,
+                      opacity: 0.9,
+                    },
+                  }}
+                >
+                  Connect
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleClick}
+                  sx={{
+                    backgroundColor: theme.palette.primary.main,
+                    color: theme.palette.primary.contrastText,
+                    borderRadius: "112px",
+                    mx: 1.5,
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.main,
+                      opacity: 0.9,
+                    },
+                  }}
+                >
+                  Create
+                </Button>
+              )}
             </Box>
           )}
         </Toolbar>

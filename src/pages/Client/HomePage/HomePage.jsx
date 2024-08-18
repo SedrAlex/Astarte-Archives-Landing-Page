@@ -12,8 +12,10 @@ import { NFTPlatformContext } from "../../../Context/NFTPlatformContext";
 
 const HomePage = () => {
 
-  const {} = useContext(NFTPlatformContext)
-  
+  const {checkIfWalletConnected} = useContext(NFTPlatformContext)
+  useEffect(() => {
+    checkIfWalletConnected()
+  },[])
 
   return (
     <>

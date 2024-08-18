@@ -4,6 +4,8 @@ import HomePage from "../pages/Client/HomePage/HomePage";
 import ExperiencesPage from "../pages/Client/ExperiencesPage/ExperiencesPage";
 import ImactFundPage from "../pages/Client/ImpactFundPage/ImactFundPage";
 import Project from "../pages/Client/ProjectByIdPage/Project";
+import UploadNft from "../pages/Admin/UploadNft/UploadNft";
+import SearchPage from "../pages/Client/SearchPage/SearchPage";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ export const router = createBrowserRouter([
       {
         path: "experiences",
         element: <ExperiencesPage />,
+      },
+      {
+        path: "upload-nft",
+        element: <UploadNft />,
+      },
+      {
+        path: "search-page",
+        element: <SearchPage />,
       },
       {
         path: "impact-fund",
