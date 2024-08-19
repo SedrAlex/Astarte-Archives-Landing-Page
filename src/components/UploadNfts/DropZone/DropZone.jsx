@@ -3,7 +3,6 @@ import { useDropzone } from "react-dropzone";
 
 // INTERNAL IMPORT
 import Style from "./DropZone.module.css";
-import PalmyraMuseum from "../../../assets/PalmyraMuseum.png"
 import uploadIcon from "../../../assets/upload.png";
 
 const DropZone = ({
@@ -11,14 +10,18 @@ const DropZone = ({
   heading,
   subHeading,
   name,
-  website,
   description,
   royalties,
   fileSize,
   category,
   properties,
   setImage,
-  uploadToPinata
+  uploadToPinata,
+  site,
+  date,
+  material,
+  dimension,
+  code
 }) => {
   const [fileUrl, setFileUrl] = useState(null);
 
@@ -27,7 +30,7 @@ const DropZone = ({
     setFileUrl(url);
     setImage(url);
     console.log(url);
-  }, []);
+  }, [uploadToPinata, setImage]);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -73,9 +76,14 @@ const DropZone = ({
                   <samp>NFT Name:</samp>
                   {name || ""}
                 </p>
+               
                 <p>
-                  <samp>Website:</samp>
-                  {website || ""}
+                  <samp>Site:</samp>
+                  {site || ""}
+                </p>
+                <p>
+                  <samp>Date:</samp>
+                  {date || ""}
                 </p>
               </div>
 
@@ -83,6 +91,18 @@ const DropZone = ({
                 <p>
                   <span>Description</span>
                   {description || ""}
+                </p>
+                <p>
+                  <span>Material</span>
+                  {material || ""}
+                </p>
+                <p>
+                  <span>Dimension</span>
+                  {dimension || ""}
+                </p>
+                <p>
+                  <span>Code</span>
+                  {code || ""}
                 </p>
               </div>
 

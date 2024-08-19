@@ -3,11 +3,11 @@ import { Box, Button, Grid, Typography, Paper, Tabs, Tab, Dialog, DialogContent,
 
 const ContributionModel = () => {
   const [value, setValue] = React.useState(0);
+  const [selectedOption, setSelectedOption] = React.useState(null);
   const [contributionOptions, setContributionOptions] = React.useState([
     { amount: '250', label: 'USD $250 / ONCE' },
     { amount: '500', label: 'USD $500 / ONCE' },
-    { amount: '1K', label: 'USD $1K / ONCE' },
-    { amount: 'ADD ANOTHER AMOUNT', label: 'ADD ANOTHER AMOUNT' },
+    { amount: '1000', label: 'USD $1000 / ONCE' },
   ]);
   const [open, setOpen] = React.useState(false);
 
@@ -19,7 +19,6 @@ const ContributionModel = () => {
         { amount: '50', label: '$50 / MONTHLY' },
         { amount: '100', label: '$100 / MONTHLY' },
         { amount: '300', label: '$300 / MONTHLY' },
-        { amount: 'ADD ANOTHER AMOUNT', label: 'ADD ANOTHER AMOUNT' },
       ]);
     } else {
       setContributionOptions([
@@ -39,8 +38,13 @@ const ContributionModel = () => {
     setOpen(false);
   };
 
+  const handleSelectOption = (amount) => {
+    setSelectedOption(amount);
+    localStorage.setItem('contribution_amount', amount);
+  };
+
   return (
-    <Box sx={{ backgroundColor: '#000', color: '#fff', minHeight: '70vh', px: 18,  }}>
+    <Box sx={{ backgroundColor: '#000', color: '#fff', minHeight: '70vh', px: 18 }}>
       <Typography variant="h4" align="center" gutterBottom>
         CHOOSE YOUR CONTRIBUTION MODEL
       </Typography>
@@ -54,7 +58,12 @@ const ContributionModel = () => {
         <Grid container spacing={2} justifyContent="center">
           {contributionOptions.map((option, index) => (
             <Grid item key={index}>
-              <ContributionOption amount={option.amount} label={option.label} />
+              <ContributionOption
+                amount={option.amount}
+                label={option.label}
+                selected={selectedOption === option.amount}
+                onSelect={handleSelectOption}
+              />
             </Grid>
           ))}
         </Grid>
@@ -62,9 +71,7 @@ const ContributionModel = () => {
           * 10% of all contributions will be allocated to Arstrate-Archeives to support museums and preserve artifacts.
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-          <Button variant="contained" color="warning" sx={{ borderRadius: 2, px: 4 }} onClick={handleOpen}>
-            CONTRIBUTE NOW
-          </Button>
+        
         </Box>
       </Paper>
 
@@ -81,7 +88,12 @@ const ContributionModel = () => {
             <Grid container spacing={2} justifyContent="center">
               {contributionOptions.map((option, index) => (
                 <Grid item key={index}>
-                  <ContributionOption amount={option.amount} label={option.label} />
+                  <ContributionOption
+                    amount={option.amount}
+                    label={option.label}
+                    selected={selectedOption === option.amount}
+                    onSelect={handleSelectOption}
+                  />
                 </Grid>
               ))}
             </Grid>
@@ -89,9 +101,7 @@ const ContributionModel = () => {
               * 10% of all contributions will be allocated to Arstrate-Archeives to support museums and preserve artifacts.
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-              <Button variant="contained" color="warning" sx={{ borderRadius: 2, px: 4 }} onClick={handleClose}>
-                CONTRIBUTE NOW
-              </Button>
+             
             </Box>
           </Paper>
         </DialogContent>
@@ -100,18 +110,20 @@ const ContributionModel = () => {
   );
 };
 
-const ContributionOption = ({ amount, label }) => {
+const ContributionOption = ({ amount, label, selected, onSelect }) => {
   const isCustomAmount = amount === 'ADD ANOTHER AMOUNT';
   return (
     <Paper
+      onClick={() => onSelect(amount)}
       sx={{
         p: 2,
         borderRadius: 2,
         backgroundColor: isCustomAmount ? 'transparent' : '#f5f5f5',
-        border: isCustomAmount ? '1px dashed #ccc' : 'none',
+        border: selected ? '2px solid #B56C32' : isCustomAmount ? '1px dashed #ccc' : 'none',
         textAlign: 'center',
         minWidth: 150,
         height: 100,
+        cursor: 'pointer',
       }}
     >
       <Typography variant="h6">{label}</Typography>

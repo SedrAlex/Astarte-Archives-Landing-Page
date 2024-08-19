@@ -1,39 +1,44 @@
-import React, { useRef } from 'react';
-import { Box, Typography, Grid, Avatar, Tabs, Tab } from '@mui/material';
-import ProjectDetails from '../ProjectDetails/ProjectDetails';
- 
-const ProjectInformation = () => {
+import React, { useRef } from "react";
+import { Box, Typography, Grid, Avatar, Tabs, Tab } from "@mui/material";
+import ProjectDetails from "../ProjectDetails/ProjectDetails";
+import peopleInvolved from "../../../assets/people_icon.svg";
+import cultureResoloution from "../../../assets/culture2.svg";
+import Heritage from "../../../assets/culture3.svg";
+import Continuity from "../../../assets/culture4.svg";
+import Leader from "../../../assets/Jose-Saramago.webp";
+
+const ProjectInformation = ({ project }) => {
   const summaryRef = useRef(null);
   const objectivesRef = useRef(null);
   const overviewRef = useRef(null);
 
   const handleTabChange = (event, newValue) => {
     if (newValue === 0) {
-      summaryRef.current.scrollIntoView({ behavior: 'smooth' });
+      summaryRef.current.scrollIntoView({ behavior: "smooth" });
     } else if (newValue === 1) {
-      objectivesRef.current.scrollIntoView({ behavior: 'smooth' });
+      objectivesRef.current.scrollIntoView({ behavior: "smooth" });
     } else if (newValue === 2) {
-      overviewRef.current.scrollIntoView({ behavior: 'smooth' });
+      overviewRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <Box sx={{ backgroundColor: "#fff", p: 4, width: "100%" }}>
+    <Box sx={{ backgroundColor: "#fff", p: 4}}>
       <Grid container spacing={2}>
         {/* Left Column */}
         <Grid item xs={12} md={6}>
           <Box sx={{ backgroundColor: "#fff", color: "#000", p: 4, mt: 3 }}>
             <Header handleTabChange={handleTabChange} />
             <div ref={summaryRef}>
-              <Details />
+              <Details project={project}/>
               <About />
-              <ProjectLeader />
+              <ProjectLeader project={project} />
             </div>
             <div ref={objectivesRef}>
               <Objectives />
             </div>
             <div ref={overviewRef}>
-              <Overview />
+              <Overview project={project} />
             </div>
           </Box>
         </Grid>
@@ -41,7 +46,7 @@ const ProjectInformation = () => {
         {/* Right Column */}
         <Grid item xs={12} md={6}>
           <Box sx={{ padding: 2 }}>
-            <ProjectDetails currentAmount={2000} targetAmount={4000} />
+            <ProjectDetails project={project} />
           </Box>
         </Grid>
       </Grid>
@@ -59,20 +64,30 @@ const Header = ({ handleTabChange }) => (
   </Box>
 );
 
-const Details = () => (
+const Details = ({project}) => (
   <Grid container spacing={2} alignItems="center" style={{ marginTop: 20 }}>
     <Grid item>
-      <img src="path/to/people-logo.png" alt="People Involved" style={{ width: 40, height: 40 }} />
+      <img
+        src={peopleInvolved}
+        alt="People Involved"
+        style={{ width: 40, height: 40 }}
+      />
     </Grid>
     <Grid item>
-      <Typography variant="h4">30</Typography>
+      <Typography variant="h4">{project?.donors?.length}</Typography>
       <Typography>People Involved</Typography>
     </Grid>
     <Grid item>
-      <img src="path/to/cultural-logo.png" alt="Cultural Restoration" style={{ width: 40, height: 40 }} />
+      <img
+        src={cultureResoloution}
+        alt="Cultural Restoration"
+        style={{ width: 40, height: 40 }}
+      />
     </Grid>
     <Grid item>
-      <Typography variant="h4">01</Typography>
+      <Typography variant="h5">
+        {project.projects[0].isEducational ? 'Educational' : 'Preserving Heritage'}
+      </Typography>
       <Typography>Cultural Restoration</Typography>
     </Grid>
   </Grid>
@@ -80,23 +95,27 @@ const Details = () => (
 
 const About = () => (
   <Box mt={4}>
-    <Typography variant="h6">ABOUT</Typography>
+   <Typography variant="h6">ABOUT SYRIAN HISTORY AND CIVILIZATION</Typography>
     <Typography>
-      In the heart of Duda Timur, there's a hidden gem high up on a hill — the sacred Pura Pucak Bukit Pintu temple and Sacred Spring Water, playing a unique role as guardian of villages below and its environmental treasures. These symbols of spiritual purity, where the sacred meets spring waters, currently face limited accessibility as well as an inefficient distribution of spring water during ceremonies. To overcome these challenges we plan to restore and create durable stairways, to build a specialized container for efficient water distribution and to build a place for communities ceremonies. This outdoor space highlights the physical, spiritual and cultural significance that courses through this place's history.
+      Syria, a land of ancient civilizations, has a rich history that dates back to the earliest human settlements. 
+      From the ancient city of Ebla to the grandeur of Palmyra, Syria has been a crossroads of cultures and empires. 
+      The country's historical significance is reflected in its diverse architectural heritage, including Roman theaters, 
+      Byzantine churches, and Islamic mosques. Despite recent challenges, efforts are being made to preserve and restore 
+      these cultural treasures, ensuring that future generations can appreciate Syria's profound historical and cultural legacy.
     </Typography>
   </Box>
 );
 
-const ProjectLeader = () => (
+const ProjectLeader = ({ project }) => (
   <Box mt={4}>
     <Typography variant="h6">PROJECT LEADER</Typography>
     <Grid container alignItems="center" spacing={2}>
       <Grid item>
-        <Avatar alt="Project Leader" src="https://via.placeholder.com/150" />
+        <Avatar alt="Project Leader" src={Leader} />
       </Grid>
       <Grid item>
-        <Typography variant="h6">JRO MANGKU I WAYAN SUDIARTA</Typography>
-        <Typography>Project ID: IFP 01 | SEMBAL, TEGALLALANG, BALI</Typography>
+        <Typography variant="h6">DR.AHMAD DAWOOD</Typography>
+        <Typography>Project ID: SCP {project?.id} | {project.projects[0]?.location}</Typography>
       </Grid>
     </Grid>
   </Box>
@@ -106,28 +125,59 @@ const Objectives = () => (
   <Box mt={4}>
     <Typography variant="h6">OBJECTIVES</Typography>
     <Grid container spacing={2} alignItems="center">
-      <Grid item>
-        <Typography>Restoration of Cultural Heritage</Typography>
+      <Grid item xs={12} sm={6} md={3}>
+        <Grid container direction="column" alignItems="center">
+          <img
+            src={Heritage}
+            alt="Restoration of Cultural Heritage"
+            style={{ width: "50px", height: "50px" }}
+          />
+          <Typography align="center">
+            Restoration of Cultural Heritage
+          </Typography>
+        </Grid>
       </Grid>
-      <Grid item>
-        <Typography>Cultural and Environmental Awareness</Typography>
+      <Grid item xs={12} sm={6} md={3}>
+        <Grid container direction="column" alignItems="center">
+          <img
+            src={peopleInvolved}
+            alt="Cultural and Environmental Awareness"
+            style={{ width: "50px", height: "50px" }}
+          />
+          <Typography align="center">
+            Cultural and Environmental Awareness
+          </Typography>
+        </Grid>
       </Grid>
-      <Grid item>
-        <Typography>Cultural Continuity</Typography>
+      <Grid item xs={12} sm={6} md={3}>
+        <Grid container direction="column" alignItems="center">
+          <img
+            src={Continuity}
+            alt="Cultural Continuity"
+            style={{ width: "50px", height: "50px" }}
+          />
+          <Typography align="center">Syrian History and Cultural Continuity</Typography>
+        </Grid>
       </Grid>
-      <Grid item>
-        {/* <SkillsIcon fontSize="large" /> */}
-        <Typography>Restoration of Cultural Skills</Typography>
+      <Grid item xs={12} sm={6} md={3}>
+        <Grid container direction="column" alignItems="center">
+          <img
+            src={cultureResoloution}
+            alt="Restoration of Cultural Skills"
+            style={{ width: "50px", height: "50px" }}
+          />
+          <Typography align="center">Restoration of Cultural Skills and Preservation</Typography>
+        </Grid>
       </Grid>
     </Grid>
   </Box>
 );
 
-const Overview = () => (
+const Overview = ({project}) => (
   <Box mt={4}>
     <Typography variant="h6">OVERVIEW</Typography>
     <Typography>
-      The objective of this project is to restore and rekindle the sacred Pura Pucak Bukit Pintu temple, nearby the village of Duda Timur, Bali. For generations, Pura Pucak Bukit Pintu has been a place of worship for its local Hindu population of one thousand people. However, the temple is 30 minutes away from the village and accessible only by foot, making it off-bounds for much of the community. As such, significant spiritual ceremonies are not being practiced and risk not being transmitted to the next generation. Quantum Temple aims to restore these ceremonies through a tripartite approach. The first is to connect the community and Pura Pucak Bukit Pintu through building a road, which will in turn facilitate the movement of materials for on-site construction projects. These include the construction of temple platforms, and the restoration of a water spring. This project funds the construction of the road to Pura Pucak Bukit Pintu.
+    {project.projects[0]?.description}
     </Typography>
   </Box>
 );

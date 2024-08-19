@@ -259,11 +259,58 @@ export const NFTPlatformProvider = ({ children }) => {
     }
   };
   //Create NFT Function
-  const createNFT = async (name, price, image, description, router) => {
-    if (!name || !description || !price || !image)
-      return setError("Data Is Missing"), setOpenError(true);
 
-    const data = JSON.stringify({ name, description, image, price });
+  const createNFT = async (
+    name,
+    price,
+    site,
+    date,
+    image,
+    material,
+    dimension,
+    code,
+    description,
+    royalties,
+    fileSize,
+    category,
+    properties,
+    router,
+    setError,
+    setOpenError
+  ) => {
+    // Initialize an array to hold the names of missing fields
+    const missingFields = [];
+
+    // Check each required field and add its name to the array if it's missing
+    if (!name) missingFields.push("Name");
+    if (!description) missingFields.push("Description");
+    if (!royalties) missingFields.push("Royalties");
+    if (!image) missingFields.push("Image");
+    if (!code) missingFields.push("Code");
+    if (!category) missingFields.push("Category");
+
+    // If there are any missing fields, display an alert and return early
+    if (missingFields.length > 0) {
+      alert(`The following fields are missing: ${missingFields.join(", ")}`);
+      return; // Prevent the process from completing
+    }
+
+    // Proceed with the rest of the function if all required fields are present
+    const data = JSON.stringify({
+      name,
+      price,
+      site,
+      date,
+      image,
+      material,
+      dimension,
+      code,
+      description,
+      royalties,
+      fileSize,
+      category,
+      properties,
+    });
 
     try {
       const response = await axios({
@@ -285,6 +332,7 @@ export const NFTPlatformProvider = ({ children }) => {
       setOpenError(true);
     }
   };
+
   //Create Sale Funnction
   // const createSale = async (url, formInputPrice, isReselling, id) => {
   //   try {
@@ -381,51 +429,81 @@ export const NFTPlatformProvider = ({ children }) => {
     try {
       const provider = new ethers.providers.JsonRpcProvider();
       const contract = await connectingWithSmartContract();
-  
+
       if (!contract.fetchMarketItems) {
-        throw new Error('fetchMarketItem method not found on contract');
+        throw new Error("fetchMarketItem method not found on contract");
       }
-  
+
       const data = await contract.fetchMarketItems();
-  
+
       if (!Array.isArray(data)) {
-        throw new Error('fetchMarketItems did not return an array');
+        throw new Error("fetchMarketItems did not return an array");
       }
-  
+
       const items = await Promise.all(
-        data.map(async ({ tokenId, seller, owner, price: unformattedPrice }) => {
-          try {
-            const tokenURI = await contract.tokenURI(tokenId);
-            const response = await axios.get(tokenURI);
-            const { image, name, description } = response.data;
-  
-            const price = ethers.utils.formatUnits(unformattedPrice.toString(), "ether");
-  
-            return {
-              price,
-              tokenId: tokenId.toNumber(),
-              seller,
-              owner,
-              image,
-              name,
-              description,
-              tokenURI,
-            };
-          } catch (innerError) {
-            console.error(`Error fetching token data for tokenId ${tokenId}:`, innerError);
-            return null; // Return null for this item if there's an error
+        data.map(
+          async ({ tokenId, seller, owner, price: unformattedPrice }) => {
+            try {
+              const tokenURI = await contract.tokenURI(tokenId);
+              const response = await axios.get(tokenURI);
+              const {
+                name,
+                site,
+                date,
+                image,
+                material,
+                dimension,
+                code,
+                description,
+                royalties,
+                fileSize,
+                category,
+                properties,
+              } = response.data;
+
+              const price = ethers.utils.formatUnits(
+                unformattedPrice.toString(),
+                "ether"
+              );
+
+              return {
+                tokenId: tokenId.toNumber(),
+                seller,
+                owner,
+                name,
+                price,
+                site,
+                date,
+                image,
+                material,
+                dimension,
+                code,
+                description,
+                royalties,
+                fileSize,
+                category,
+                properties,
+                tokenURI,
+              };
+            } catch (innerError) {
+              console.error(
+                `Error fetching token data for tokenId ${tokenId}:`,
+                innerError
+              );
+              return null; // Return null for this item if there's an error
+            }
           }
-        })
+        )
       );
-  
+
       // Filter out any null items
-      return items.filter(item => item !== null);
+      return items.filter((item) => item !== null);
     } catch (error) {
       console.error("Error while connecting with the smart contract:", error);
       return [];
     }
   };
-  
+
   // FETCHING MY NFTS OR LISTED NFTs
   const fetchMyNFTsOrListedNFTs = async (type) => {
     try {
@@ -440,7 +518,19 @@ export const NFTPlatformProvider = ({ children }) => {
           async ({ tokenId, seller, owner, price: unformattedPrice }) => {
             const tokenURI = await contract.tokenURI(tokenId);
             const {
-              data: { image, name, description },
+              data: {  
+                name,
+                site,
+                date,
+                image,
+                material,
+                dimension,
+                code,
+                description,
+                royalties,
+                fileSize,
+                category,
+                properties,},
             } = await axios.get(tokenURI);
             const price = ethers.utils.formatUnits(
               unformattedPrice.toString(),
@@ -451,9 +541,18 @@ export const NFTPlatformProvider = ({ children }) => {
               tokenId: tokenId.toNumber(),
               seller,
               owner,
-              image,
               name,
+              site,
+              date,
+              image,
+              material,
+              dimension,
+              code,
               description,
+              royalties,
+              fileSize,
+              category,
+              properties,
               tokenURI,
             };
           }

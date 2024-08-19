@@ -1,9 +1,9 @@
-// src/components/HeroSection.js
-import React from "react";
+import React, { useRef } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import ExperiencesBackground from "../../../assets/ExperincesBackground.jpg";
 import NavBar from "../../../components/NavBar/NavBar";
+
 const HeroContainer = styled(Box)({
   position: "relative",
   height: "100vh",
@@ -32,7 +32,11 @@ const HeroContent = styled(Box)({
   zIndex: 1,
 });
 
-const ExperiencesHero = () => {
+const ExperiencesHero = ({ yearlyRef, seasonlyRef, upcominglyRef }) => {
+  const scrollToSection = (ref) => {
+    ref.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <HeroContainer>
       <NavBar />
@@ -45,13 +49,28 @@ const ExperiencesHero = () => {
           Authentic Experiences Supporting Local Communities
         </Typography>
         <Box mt={4}>
-          <Button variant="outlined" color="inherit" sx={{ margin: 1 }}>
+          <Button
+            variant="outlined"
+            color="inherit"
+            sx={{ margin: 1 }}
+            onClick={() => scrollToSection(yearlyRef)}
+          >
             Year-Round Experiences
           </Button>
-          <Button variant="outlined" color="inherit" sx={{ margin: 1 }}>
+          <Button
+            variant="outlined"
+            color="inherit"
+            sx={{ margin: 1 }}
+            onClick={() => scrollToSection(seasonlyRef)}
+          >
             Seasonal Events
           </Button>
-          <Button variant="outlined" color="inherit" sx={{ margin: 1 }}>
+          <Button
+            variant="outlined"
+            color="inherit"
+            sx={{ margin: 1 }}
+            onClick={() => scrollToSection(upcominglyRef)}
+          >
             Upcoming Experiences
           </Button>
         </Box>

@@ -5,36 +5,21 @@ import {
   Card,
   CardMedia,
   CardContent,
-  CardActions,
   Button,
 } from "@mui/material";
-import palmyra from "../../../assets/Breif.jpeg";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward"; // Import the ArrowForward icon
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useGetExperiencesQuery } from "../../../redux/apis/clientsApi";
+import CustomLoader from "../../../components/CustomLoader/CustomLoader";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 function CultureExperiences() {
-  const experiences = [
-    {
-      title: "Sunrise Water Purification at Pura Tirta Empul",
-      description:
-        "Meaning 'Holy Spring' in Balinese, Tirta Empul was built for Vishnu, the Hindu God of Water. Today, it draws people from across the globe to experience ritual purification for the mind, body and spirit.",
-      imageUrl: palmyra,
-      duration: "Duration: 6h",
-    },
-    {
-      title: "Sunrise Water Purification at Pura Tirta Empul",
-      description:
-        "Meaning 'Holy Spring' in Balinese, Tirta Empul was built for Vishnu, the Hindu God of Water. Today, it draws people from across the globe to experience ritual purification for the mind, body and spirit.",
-      imageUrl: palmyra,
-      duration: "Duration: 6h",
-    },
-    {
-      title: "Sunrise Water Purification at Pura Tirta Empul",
-      description:
-        "Meaning 'Holy Spring' in Balinese, Tirta Empul was built for Vishnu, the Hindu God of Water. Today, it draws people from across the globe to experience ritual purification for the mind, body and spirit.",
-      imageUrl: palmyra,
-      duration: "Duration: 6h",
-    },
-  ];
+  const { data: experiences, error, isLoading } = useGetExperiencesQuery();
+  const tours = experiences?.results.slice(0, 3);
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  if (isLoading) {
+    return <CustomLoader />;
+  }
 
   return (
     <Box
@@ -48,7 +33,7 @@ function CultureExperiences() {
         padding: 3,
       }}
     >
-      {experiences.map((experience, index) => (
+      {tours?.map((experience, index) => (
         <Card
           key={index}
           sx={{
@@ -65,7 +50,7 @@ function CultureExperiences() {
         >
           <CardMedia
             component="img"
-            image={experience.imageUrl}
+            image={`http://localhost:3000/${experience.media[0]}`} // Corrected image URL
             alt="Cultural Experience"
             sx={{
               width: "100%",
@@ -74,9 +59,20 @@ function CultureExperiences() {
               boxShadow: "0 -8px 6px -6px #B56C32",
             }}
           />
-          <CardContent sx={{ padding: 3, color: "rgb(234, 218, 213)" }}>
+          <CardContent
+            sx={{
+              padding: 3,
+              color: "rgb(234, 218, 213)",
+              height: 200, // Fixed height for CardContent
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitLineClamp: 6, // Limit to 6 lines
+              WebkitBoxOrient: "vertical",
+              textOverflow: "ellipsis",
+            }}
+          >
             <Typography gutterBottom variant="h5" component="div">
-              {experience.title}
+              {experience.name}
             </Typography>
             <Typography
               variant="body2"
@@ -95,7 +91,6 @@ function CultureExperiences() {
                   backgroundColor: "#2C2C2C",
                   fontSize: "0.75rem",
                   color: "rgb(234, 218, 213)",
-
                   width: "auto",
                 }}
               >
@@ -118,6 +113,7 @@ function CultureExperiences() {
                     color: "rgb(234, 218, 213)",
                   },
                 }}
+                onClick={() => navigate(`/experiences/${experience.id}`)} // Navigate to experience details
               >
                 Learn More
               </Button>

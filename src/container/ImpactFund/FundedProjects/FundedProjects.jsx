@@ -9,13 +9,14 @@ import {
   Box,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import bg1 from "../../../assets/acheived1.webp";
-import bg2 from "../../../assets/acheived2.jpg";
-import bg3 from "../../../assets/Booza.jpg";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { useGetImpactFundsQuery } from "../../../redux/apis/clientsApi";
+import CustomLoader from "../../../components/CustomLoader/CustomLoader";
+
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,
+  height: 450, // Set a fixed height for the card
   margin: "20px",
   backgroundColor: "#000",
   color: "#fff",
@@ -65,8 +66,17 @@ const ViewProjectButton = styled(Button)(({ theme }) => ({
   display: "block",
 }));
 
+const FundedProjects = () => {
+
+
 const ProjectCard = ({ impactFund }) => {
-  const imageUrl = `http://localhost:3000/${impactFund.projects[0].media[0]}`
+  const navigate = useNavigate(); 
+
+  const handleViewProject = () => {
+    navigate(`/impact-fund/${impactFund.id}`);
+  };
+
+  const imageUrl = `http://localhost:3000/${impactFund.projects[0].media[0]}`;
   return (
     <StyledCard>
       <CardMedia
@@ -84,15 +94,23 @@ const ProjectCard = ({ impactFund }) => {
         <StatusLabel>{impactFund.status}</StatusLabel>
       </CardContent>
       <CardActions>
-        <ViewProjectButton>View Project →</ViewProjectButton>
+        <ViewProjectButton onClick={handleViewProject}>View Project →</ViewProjectButton>
       </CardActions>
     </StyledCard>
   );
 };
 
-const FundedProjects = () => {
   const { data: impactFunds, isLoading, isError, error } = useGetImpactFundsQuery();
   console.log("data", impactFunds);
+
+  // Filter the impact funds to include only those with status "active"
+  const activeImpactFunds = impactFunds?.results.filter(
+    (impactFund) => impactFund.status === "completed"
+  );
+
+  if (isLoading) {
+    return <CustomLoader />;
+  }
 
   return (
     <Box sx={{ backgroundColor: "#000", padding: "20px" }}>
@@ -103,7 +121,7 @@ const FundedProjects = () => {
         Funded Projects
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
-        {impactFunds?.results.slice(0, 3).map((impactFund, index) => (
+        {activeImpactFunds?.slice(0, 3).map((impactFund, index) => (
           <ProjectCard key={index} impactFund={impactFund} />
         ))}
       </Box>

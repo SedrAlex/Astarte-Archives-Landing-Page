@@ -13,8 +13,10 @@ import community from "../../../assets/community.png";
 import authentication from "../../../assets/auth.svg";
 import CultureExperiences from "./CultureExpreiences"; // Ensure the file name is correct
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"; // Import the ArrowForward icon
+import { useNavigate } from "react-router-dom";
 
 const Experiences = () => {
+  const navigate = useNavigate()
   const achievements = [
     {
       title: "Private cultural immersions",
@@ -113,6 +115,8 @@ const Experiences = () => {
             color: "rgb(234, 218, 213)",
           },
         }}
+        onClick={() => navigate(`/experiences`)} // Navigate to experience details
+
       >
         Discover More Experiences
       </Button>

@@ -1,0 +1,40 @@
+
+.login {
+    width: 100%;
+    margin-block: 3rem;
+    background-color: #000;
+    background-image: url('../../assets//impact.webp'); /* Add the path to your image here */
+    background-size: contain; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+.login_box{
+    width: 30%;
+    margin: 0 auto;
+}
+
+.login_box h1{
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 5rem;
+}
+
+.login_box_para{
+    text-align: center;
+    line-height: 0;
+    margin-top: 5rem;
+    font-weight: 700;
+}
+
+.login_box_para a{
+    font-weight: 500;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+
+@media screen and (max-width: 35em) {
+    .login_box{
+        width: 90%;
+    }
+}

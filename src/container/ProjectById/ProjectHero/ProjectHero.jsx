@@ -2,32 +2,37 @@ import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import NavBar from "../../../components/NavBar/NavBar";
-const ProjectHero = () => {
+
+const ProjectHero = ({ project }) => {
+  const statusText = project?.status === "pending" ? "NEEDS FUNDING" : "ACHIEVED";
+  const statusColor = project?.status === "pending" ? "#FEC879" : "#C3E886";
+  const imageUrl = `http://localhost:3000/${project?.projects[0]?.media[0]}`;
+console.log(project.status);
   return (
-    <HeroContainer>
+    <HeroContainer imageUrl={imageUrl}>
       <NavBar />
-
       <Content>
-
-      <Typography
+        <Typography
           variant="body1"
           sx={{
             display: "inline-block",
             padding: "5px 20px",
-            backgroundColor: "#FEC879",
+            backgroundColor: statusColor,
             color: "#000",
             borderRadius: "20px",
             marginRight: "5px",
-            marginTop: "20px",
+            marginTop: "10px",
+            marginBottom: "10px",
+
           }}
         >
-          NEEDS FUNDING
+          {statusText}
         </Typography>
         <Typography variant="h1" component="h1" gutterBottom>
-          Traiditonal Food  Renewal Phase I
+          {project?.projects[0]?.name}
         </Typography>
         <Typography variant="h6" component="h6" gutterBottom>
-        Cultural Regeneration
+          Cultural Regeneration
         </Typography>
       </Content>
     </HeroContainer>
@@ -36,10 +41,9 @@ const ProjectHero = () => {
 
 export default ProjectHero;
 
-const HeroContainer = styled(Box)(({ theme }) => ({
+const HeroContainer = styled(Box)(({ theme, imageUrl }) => ({
   height: "50vh",
-  backgroundImage:
-    "url(https://quantumtemple.xyz/_next/image?url=https%3A%2F%2Fd3ew556gdf3fcf.cloudfront.net%2Fprojects%2F11_renovating-pura-pucak-bukit-pintu-temple-road-accessibility%2Fimages%2F1.cover.jpg&w=1920&q=75)",
+  backgroundImage: `url(${imageUrl})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
   display: "flex",

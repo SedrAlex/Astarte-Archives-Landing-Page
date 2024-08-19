@@ -13,8 +13,8 @@
     align-items: center;
     margin-top: 8rem;
     margin-bottom: 3rem;
-    box-shadow: 1rem 1rem 1rem  #d3dae7,
-    -1rem -1rem 1rem #fff;
+    /* box-shadow: 1rem 1rem 1rem  #d3dae7,
+    -1rem -1rem 1rem #fff; */
 }
 
 .SearchBar_box_icon{

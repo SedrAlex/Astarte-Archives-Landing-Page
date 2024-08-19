@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import backgroundImage from "../../../assets/impact.webp"; // Update the path as needed
+import { useNavigate } from "react-router-dom";
 
 const BackgroundBox = styled(Box)({
   backgroundImage: `url(${backgroundImage})`,
@@ -23,6 +24,8 @@ const GlowingTypography = styled(Typography)({
 });
 
 const ImpactSection = () => {
+  const navigate = useNavigate()
+
   return (
     <BackgroundBox>
       <GlowingTypography variant="h4" gutterBottom color="rgb(234, 218, 213)">
@@ -50,6 +53,8 @@ const ImpactSection = () => {
             backgroundColor: "#FF7F00",
           },
         }}
+        onClick={() => navigate(`/impact-fund/`)}
+
       >
         SUPPORT OUR IMPACT PROJECTS →
       </Button>

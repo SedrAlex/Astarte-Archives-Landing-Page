@@ -58,6 +58,12 @@ export const clientsApi = apiService.injectEndpoints({
         method: "GET",
       }),
     }),
+    getStastics: builder.query({
+      query: () => ({
+        url: `impact-funds/statistics`,
+        method: "GET",
+      }),
+    }),
     getExperiences: builder.query({
       query: () => ({
         url: "experiences",
@@ -70,6 +76,27 @@ export const clientsApi = apiService.injectEndpoints({
         method: "GET",
       }),
     }),
+    loginUser: builder.mutation({
+      query: (credentials) => ({
+        url: "auth/login",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
+    bookExperience: builder.mutation({
+      query: ({data}) => ({
+        url: "user-bookings",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    contributeProject: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `impact-funds/${id}/donate`,
+        method: "POST",
+        body: data,
+      }),
+    })
   }),
   overrideExisting: false,
 });
@@ -82,6 +109,11 @@ export const {
   useGetImpactFundByIdQuery,
   useGetExperiencesQuery,
   useGetExperienceByIdQuery,
+  useGetStasticsQuery,
+  useLoginUserMutation,
+  useBookExperienceMutation,
+  useContributeProjectMutation
+
 } = clientsApi;
 
 // Export the extended API service

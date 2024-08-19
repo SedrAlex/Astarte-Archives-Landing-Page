@@ -8,9 +8,11 @@ import {
   Button,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
-const HoverCard = ({ image, title, description }) => {
+const HoverCard = ({ id,image, title, description }) => {
   const [hover, setHover] = useState(false);
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     setHover(true);
@@ -36,7 +38,11 @@ const HoverCard = ({ image, title, description }) => {
             >
               {description}
             </Typography>
-            <Button variant="warning" className="learn-more">
+            <Button
+              variant="warning"
+              className="learn-more"
+              onClick={() => navigate(`/experiences/${id}`)}
+            >
               Learn More →
             </Button>
           </Box>

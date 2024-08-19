@@ -14,18 +14,33 @@ import DamascusMuseum from "../../../assets/DamascusMuseum.png";
 import AlRaqqaMuseum from "../../../assets/AlRaqqaMuseum.png";
 import PalmyraMuseum from "../../../assets/PalmyraMuseum.png";
 import uploadIcon from "../../../assets/upload.png";
-import { Router, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { FaLocationDot } from "react-icons/fa6";
+import { MdDateRange } from "react-icons/md";
+import { IoPricetagOutline } from "react-icons/io5";
+import { SiMaterialformkdocs } from "react-icons/si";
+import { RxDimensions } from "react-icons/rx";
+import { LuCodesandbox } from "react-icons/lu";
 const UploadItem = ({ uploadToPinata, createNFT }) => {
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState("");
+  const [site, setSite] = useState("");
+  const [material, setMaterial] = useState("");
+  const [dimension, setDimension] = useState("");
+  const [code, setCode] = useState("");
+  const [date, setDate] = useState("");
   const [active, setActive] = useState(0);
   const [name, setName] = useState("");
   const [website, setWebsite] = useState("");
   const [description, setDescription] = useState("");
   const [royalties, setRoyalties] = useState("");
   const [fileSize, setFileSize] = useState("");
-  const [category, setCategory] = useState(0);
+  const [category, setCategory] = useState("");
   const [properties, setProperties] = useState("");
   const [image, setImage] = useState(null);
+  const [artifactName, setArtifactName] = useState("");
+  const [historicalPeriod, setHistoricalPeriod] = useState("");
+  const [origin, setOrigin] = useState("");
+  const [currentLocation, setCurrentLocation] = useState("");
   const navigate = useNavigate();
 
   const categoryArry = [
@@ -54,57 +69,37 @@ const UploadItem = ({ uploadToPinata, createNFT }) => {
         heading="Drag & drop file"
         subHeading="or Browse media on your device"
         name={name}
-        website={website}
         description={description}
         royalties={royalties}
         fileSize={fileSize}
         category={category}
         properties={properties}
-        // image={uploadIcon}
         setImage={setImage}
+        site={site}
+        date={date}
+        material={material}
+        dimension={dimension}
+        code={code}
         uploadToPinata={uploadToPinata}
       />
 
       <div className={Style.upload_box}>
         <div className={formStyle.Form_box_input}>
-          <label htmlFor="nft">Item Name</label>
+          <label htmlFor="name">Artifact Name</label>
           <input
             type="text"
-            placeholder="shoaib bhai"
+            placeholder="Artifact Name"
             className={formStyle.Form_box_input_userName}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
 
         <div className={formStyle.Form_box_input}>
-          <label htmlFor="website">Website</label>
-          <div className={formStyle.Form_box_input_box}>
-            <div className={formStyle.Form_box_input_box_icon}>
-              <MdOutlineHttp />
-            </div>
-
-            <input
-              type="text"
-              placeholder="website"
-              onChange={(e) => setWebsite(e.target.value)}
-            />
-          </div>
-
-          <p className={Style.upload_box_input_para}>
-            Ciscrypt will include a link to this URL on this item's detail page,
-            so that users can click to learn more about it. You are welcome to
-            link to your own webpage with more details.
-          </p>
-        </div>
-
-        <div className={formStyle.Form_box_input}>
           <label htmlFor="description">Description</label>
           <textarea
-            name=""
-            id=""
             cols="30"
             rows="6"
-            placeholder="something about yourself in few words"
+            placeholder="Description"
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
           <p>
@@ -114,13 +109,13 @@ const UploadItem = ({ uploadToPinata, createNFT }) => {
         </div>
 
         <div className={formStyle.Form_box_input}>
-          <label htmlFor="name">Choose collection</label>
+          <label htmlFor="museum">Choose Museum</label>
           <p className={Style.upload_box_input_para}>
-            Choose an exiting collection or create a new one
+            Choose an existing Museum for now
           </p>
 
           <div className={Style.upload_box_slider_div}>
-            {categoryArry.map((el, i) => (
+          {categoryArry.map((el, i) => (
               <div
                 className={`${Style.upload_box_slider} ${
                   active === i + 1 ? Style.active : ""
@@ -128,7 +123,7 @@ const UploadItem = ({ uploadToPinata, createNFT }) => {
                 key={i + 1}
                 onClick={() => {
                   setActive(i + 1);
-                  setCategory(el.category);
+                  setCategory(el.category); // Set category as string
                 }}
               >
                 <div className={Style.upload_box_slider_box}>
@@ -145,7 +140,7 @@ const UploadItem = ({ uploadToPinata, createNFT }) => {
                     <TiTick />
                   </div>
                 </div>
-                <p>Crypto Legend - {el.category} </p>
+                <p> This artifact belongs to {el.category} - Museum</p>
               </div>
             ))}
           </div>
@@ -192,15 +187,80 @@ const UploadItem = ({ uploadToPinata, createNFT }) => {
             </div>
           </div>
           <div className={formStyle.Form_box_input}>
-            <label htmlFor="Price">Price</label>
+            <label htmlFor="Price">Price (Optional)</label>
             <div className={formStyle.Form_box_input_box}>
               <div className={formStyle.Form_box_input_box_icon}>
-                <AiTwotonePropertySafety />
+                <IoPricetagOutline />
               </div>
               <input
                 type="text"
                 placeholder="Price"
                 onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className={formStyle.Form_box_input}>
+            <label htmlFor="Site">Site </label>
+            <div className={formStyle.Form_box_input_box}>
+              <div className={formStyle.Form_box_input_box_icon}>
+                <FaLocationDot />
+              </div>
+              <input
+                type="text"
+                placeholder="Site"
+                onChange={(e) => setSite(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className={formStyle.Form_box_input}>
+            <label htmlFor="Date">Date </label>
+            <div className={formStyle.Form_box_input_box}>
+              <div className={formStyle.Form_box_input_box_icon}>
+                <MdDateRange />
+              </div>
+              <input
+                type="text"
+                placeholder="2000 Bc"
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className={formStyle.Form_box_input}>
+            <label htmlFor="Material">Material</label>
+            <div className={formStyle.Form_box_input_box}>
+              <div className={formStyle.Form_box_input_box_icon}>
+                <SiMaterialformkdocs />
+              </div>
+              <input
+                type="text"
+                placeholder="Gold"
+                onChange={(e) => setMaterial(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className={formStyle.Form_box_input}>
+            <label htmlFor="Dimensions">Dimensions </label>
+            <div className={formStyle.Form_box_input_box}>
+              <div className={formStyle.Form_box_input_box_icon}>
+                <RxDimensions />
+              </div>
+              <input
+                type="text"
+                placeholder="32 x 10"
+                onChange={(e) => setDimension(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className={formStyle.Form_box_input}>
+            <label htmlFor="Code">Code</label>
+            <div className={formStyle.Form_box_input_box}>
+              <div className={formStyle.Form_box_input_box_icon}>
+                <LuCodesandbox />
+              </div>
+              <input
+                type="text"
+                placeholder="M1124"
+                onChange={(e) => setCode(e.target.value)}
               />
             </div>
           </div>
@@ -213,14 +273,18 @@ const UploadItem = ({ uploadToPinata, createNFT }) => {
               createNFT(
                 name,
                 price,
+                site,
+                date,
                 image,
+                material,
+                dimension,
+                code,
                 description,
                 navigate,
-                // website,
-                // royalties,
-                // fileSize,
-                // category,
-                // properties
+                royalties,
+                fileSize,
+                category,
+                properties,                
               )
             }
             classStyle={Style.upload_box_btn_style}

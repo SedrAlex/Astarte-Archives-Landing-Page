@@ -3,11 +3,12 @@ import {
   Box,
   Typography,
   Button,
-  LinearProgress,
   Divider,
 } from "@mui/material";
-import Logo from "../../../assets/logo.png";
 import { styled } from "@mui/system";
+import { useSelector } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+import { useContributeProjectMutation } from "../../../redux/apis/clientsApi";
 
 const CustomProgressBar = styled("div")(({ progress }) => ({
   position: "relative",
@@ -27,20 +28,7 @@ const CustomProgressBar = styled("div")(({ progress }) => ({
     transition: "width 0.3s ease-in-out",
   },
 }));
-const LogoCircle = styled("div")(({ progress }) => ({
-  position: "absolute",
-  top: "60%",
-  left: `${progress}%`,
-  transform: "translate(-50%, -50%)",
-  width: 40,
-  height: 40,
-  borderRadius: "50%",
-  backgroundColor: "#000",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  zIndex: 1,
-}));
+
 const CustomButton = styled(Button)(({ theme }) => ({
   margin: theme.spacing(1),
   padding: theme.spacing(1, 3),
@@ -50,8 +38,30 @@ const CustomButton = styled(Button)(({ theme }) => ({
   alignItems: "center",
   color: "#000",
 }));
-const ProjectDetails = ({ currentAmount, targetAmount }) => {
+
+const ProjectDetails = ({ project }) => {
+  const currentAmount = project?.allocatedAmount;
+  const targetAmount = project?.totalAmount;
   const progress = (currentAmount / targetAmount) * 100;
+  const isPending = project?.status === "pending";
+  const user = useSelector((state) => state?.user?.user);
+  const [contributeProject] = useContributeProjectMutation();
+
+  const handleToken = async () => {
+    try {
+      const contributionAmount = localStorage.getItem("contribution_amount");
+      const contributionData = {
+        amount: contributionAmount,
+        user: user.id,
+      };
+      await contributeProject({ id: project.id, data: contributionData });
+      console.log('Contribution successful');
+      alert('Thank you for your contribution!');
+    } catch (error) {
+      console.error('Contribution failed', error);
+      alert('Contribution failed. Please try again.');
+    }
+  };
 
   return (
     <Box
@@ -59,7 +69,6 @@ const ProjectDetails = ({ currentAmount, targetAmount }) => {
         maxWidth: 800,
         height: 500,
         margin: "auto",
-        // padding: 2,
         borderRadius: 2,
         boxShadow: 3,
         backgroundColor: "#f5f5f5",
@@ -82,13 +91,13 @@ const ProjectDetails = ({ currentAmount, targetAmount }) => {
           sx={{
             display: "inline-block",
             padding: "5px 5px",
-            backgroundColor: "#FEC879",
+            backgroundColor: isPending ? "#FEC879" : "#C3E886",
             color: "#000",
             borderRadius: "20px",
             marginRight: "5px",
           }}
         >
-          NEEDS FUNDING
+          {isPending ? "NEEDS FUNDING" : "ACHIEVED"}
         </Typography>
       </Box>
       <Divider />
@@ -99,9 +108,6 @@ const ProjectDetails = ({ currentAmount, targetAmount }) => {
       </Typography>
       <Box sx={{ position: "relative", marginBottom: 2, px: 8 }}>
         <CustomProgressBar progress={progress} />
-        <LogoCircle progress={progress}>
-          <img src={Logo} alt="Logo" style={{ width: "70%", height: "70%" }} />
-        </LogoCircle>
       </Box>
       <Typography variant="h6" align="center" gutterBottom>
         BUDGET: US ${targetAmount}
@@ -115,15 +121,26 @@ const ProjectDetails = ({ currentAmount, targetAmount }) => {
       >
         VIEW PROJECT BUDGET BREAKDOWN
       </Typography>
-      <Box sx={{display:"flex", alignItems:"center",justifyContent:"center"}}>
-        {" "}
-        <CustomButton variant="contained">
-          CONTRIBUTE TO THIS PROJECT →
-        </CustomButton>{" "}
+      <Box
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+        {isPending && user && user.role !== "admin" && (
+          <StripeCheckout
+            stripeKey='pk_test_51NDWMnDnOnVRIDi92NbgY9ebRx7zyZtSdTjRGOdGjv9ICqwK3zQg3VpKAKpUyP071p7DPtfYH0v5naP6iPxRKI1w00j76ULrXE'
+            token={handleToken}
+            amount={localStorage.getItem("contribution_amount") * 100} // Stripe expects the amount in cents
+            name="Contribute to Project"
+            currency="USD"
+          >
+            <CustomButton variant="contained">
+              CONTRIBUTE TO THIS PROJECT →
+            </CustomButton>
+          </StripeCheckout>
+        )}
       </Box>
-
-      <Typography variant="caption" align="center" display="block" mx={10} >
-      * 10% of all contributions will be allocated to Arstrate-Archeives to support museums and preserve artifacts.
+      <Typography variant="caption" align="center" display="block" mx={10}>
+        * 10% of all contributions will be allocated to Arstrate-Archeives to
+        support museums and preserve artifacts.
       </Typography>
     </Box>
   );

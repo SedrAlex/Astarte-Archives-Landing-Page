@@ -17,8 +17,8 @@ const UploadNft = () => {
         <div className={Style.uploadNFT_box_heading}>
           <h1>Create New NFT</h1>
           <p>
-            You can set preferred display name, create your profile URL and
-            manage other personal settings.
+            You can set artifacts display name, create  artifact NFT and
+            manage other  settings.
           </p>
         </div>
 

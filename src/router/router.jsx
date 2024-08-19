@@ -6,6 +6,10 @@ import ImactFundPage from "../pages/Client/ImpactFundPage/ImactFundPage";
 import Project from "../pages/Client/ProjectByIdPage/Project";
 import UploadNft from "../pages/Admin/UploadNft/UploadNft";
 import SearchPage from "../pages/Client/SearchPage/SearchPage";
+import ExperiencePage from "../pages/Client/ExperiencePage/ExperiencePage";
+import SignInPage from "../pages/SignInPage/SignInPage";
+import NFTDetailsPage from "../pages/Client/NFTDetailsPage/NFTDetailsPage";
+import NFTDetailsMainPage from "../pages/Client/NFTDetailsPage/NFTDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -18,12 +22,29 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
+        path: "sign-in",
+        element: <SignInPage />,
+      },
+      {
         path: "experiences",
-        element: <ExperiencesPage />,
+        children: [
+          {
+          path: "",
+          element: <ExperiencesPage />,
+          },
+          {
+            path: ":id",
+            element: <ExperiencePage />,
+            },
+        ]
       },
       {
         path: "upload-nft",
         element: <UploadNft />,
+      },
+      {
+        path: "nft-details",
+        element: <NFTDetailsMainPage />,
       },
       {
         path: "search-page",

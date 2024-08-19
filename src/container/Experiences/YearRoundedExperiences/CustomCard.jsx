@@ -8,8 +8,14 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-const CustomCard = ({ image, title, description, duration, peopleMax }) => {
+const CustomCard = ({id, image, title, description, duration, peopleMax }) => {
+  const navigate =useNavigate()
+
+  const handleViewExperience = () => {
+    navigate(`/experiences/${id}`);
+  };
   return (
     <Card
       sx={{
@@ -82,6 +88,8 @@ const CustomCard = ({ image, title, description, duration, peopleMax }) => {
           variant="contained"
           color="warning"
           sx={{ margin: "auto" }}
+          onClick={handleViewExperience}
+
         >
           BOOK NOW
         </Button>

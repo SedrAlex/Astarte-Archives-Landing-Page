@@ -44,9 +44,7 @@ const ImpactFundedHero = () => {
         <Typography variant="h6" component="p" gutterBottom>
           EMPOWER COMMUNITIES TO SUSTAIN LOCAL CULTURES, PROTECT NATURAL HABITATS, AND ENABLE AUTHENTIC CULTURAL EXCHANGES THAT CHANGE LIVES.
         </Typography>
-        <Button variant="contained" color="warning" size="large">
-          CONTRIBUTE NOW
-        </Button>
+   
       </HeroContent>
      
     </BackgroundImage>

@@ -2,7 +2,7 @@ import React from "react";
 import CustomCard from "./CustomCard";
 import { Box, Typography } from "@mui/material";
 
-const YearRoundedExperiences = () => {
+const YearRoundedExperiences = ({ tours }) => {
   return (
     <Box
       sx={{
@@ -47,20 +47,17 @@ const YearRoundedExperiences = () => {
           flexWrap: "wrap",
         }}
       >
-        <CustomCard
-          image="https://i.pinimg.com/564x/e3/30/80/e330804dd90e966286401f4486cf1dcd.jpg"
-          title="EXPLORE THE MAJESTIC CITADEL OF ALEPPO"
-          description="Discover the rich history of Aleppo Citadel, a UNESCO World Heritage site. Explore its ancient walls, grand halls, and breathtaking views of the city. Learn about its strategic importance and architectural marvels."
-          duration="4H"
-          peopleMax="30"
-        />
-        <CustomCard
-          image="https://i.pinimg.com/564x/7a/d7/4c/7ad74c73276dbd49bd625e5dd1b18efe.jpg"
-          title="DISCOVER THE ANCIENT BOSRA AL-SHAM"
-          description="Journey through the ancient city of Bosra Al-Sham, known for its well-preserved Roman theater and historical significance. Experience the blend of Roman, Byzantine, and Islamic architecture in this remarkable site."
-          duration="5H"
-          peopleMax="25"
-        />
+        {tours?.map((tour, index) => (
+          <CustomCard
+            key={index}
+            id={tour.id}
+            image={`http://localhost:3000/${tour.media[0]}`} // Assuming media is an array of image paths
+            title={tour.title}
+            description={tour.description}
+            duration={tour.duration} // Assuming duration is a property of tour
+            peopleMax={tour.capacity} // Assuming peopleMax is a property of tour
+          />
+        ))}
       </Box>
     </Box>
   );
